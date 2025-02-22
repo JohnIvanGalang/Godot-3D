@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://vu161gfdvkww"]
+[gd_scene load_steps=6 format=3 uid="uid://vu161gfdvkww"]
 
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_72ln2"]
 
@@ -15,11 +15,8 @@ sky = SubResource("Sky_knwkg")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6uao7"]
-albedo_color = Color(0.802796, 0.8512, 0.544706, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1n6e"]
-albedo_color = Color(0.670963, 0.596992, 0.824628, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i65fe"]
+albedo_color = Color(0.724, 1, 0.28, 1)
 
 [node name="Main 3D" type="Node3D"]
 
@@ -31,50 +28,55 @@ transform = Transform3D(-0.497733, 0.826412, -0.263258, 0.667318, 0.558772, 0.49
 shadow_enabled = true
 
 [node name="Floor" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.95)
-material_override = SubResource("StandardMaterial3D_6uao7")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.9, 0, 11.45)
+material_override = SubResource("StandardMaterial3D_i65fe")
 use_collision = true
-size = Vector3(60.3, 1.9, 60.1)
+size = Vector3(57.9, 1.9, 68.8)
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
-material_override = SubResource("StandardMaterial3D_q1n6e")
+[node name="Combiner" type="CSGCombiner3D" parent="."]
 use_collision = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="wall & door" type="CSGBox3D" parent="Combiner"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2, 4.2, 2.4)
 size = Vector3(1, 6.8, 35.8)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D/CSGBox3D"]
-transform = Transform3D(0.429751, 0.678961, -0.595253, 0.287947, 0.521763, 0.803025, 0.855804, -0.516503, 0.0287235, 0.400001, 0.5, 6.5)
-operation = 2
-radius = 0.9
-height = 6.4
-
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Combiner/wall & door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0999994, -1.9, 2.8)
 operation = 2
 size = Vector3(1.6, 2.8, 2.6)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="wall 1" type="CSGBox3D" parent="Combiner"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.2, 4.2, -15)
 size = Vector3(1, 6.8, 35.8)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="wall 2" type="CSGBox3D" parent="Combiner"]
 transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 20.1, 4.4, 16.55)
 size = Vector3(1, 6.8, 15.5)
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGCombiner3D"]
+[node name="sphere" type="CSGSphere3D" parent="Combiner"]
 transform = Transform3D(4.872, 0, 0, 0, 10.7671, 0, 0, 0, 4.872, 13.3, 4.5, 9)
 radius = 0.4
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+[node name="cylinder" type="CSGCylinder3D" parent="Combiner"]
 transform = Transform3D(1.2, 0, 0, 0, 6.9, 0, 0, 0, 1.2, 3.7, 5.1, -2.9)
 radius = 0.9
 height = 1.2
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D"]
+[node name="cursor" type="CSGPolygon3D" parent="Combiner"]
 transform = Transform3D(1.4331, -1.51356, -1.76275, 1.68033, 1.2404, 1.734, -0.0825794, -1.02696, 4.69237, -2.1, -1.7, 19.7)
 polygon = PackedVector2Array(3.8, -2.9, 4, 2.6, 7.4, -1.7, 5.2, -1)
+
+[node name="box1" type="CSGBox3D" parent="Combiner"]
+transform = Transform3D(0.984808, -0.295202, 0, 0.173648, 1.67417, 0, 0, 0, 1, 5, 2.165, 34.55)
+size = Vector3(19.2, 1.9, 3.4)
+
+[node name="box2" type="CSGBox3D" parent="Combiner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2.15, -5.3)
+size = Vector3(8.2, 2.4, 5.2)
+
+[node name="box3" type="CSGBox3D" parent="Combiner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.7, 1.8, 0.299999)
+size = Vector3(2.6, 1.9, 2.6)
 
 [node name="ProtoController" parent="." instance=ExtResource("1_72ln2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.18951, 3.00906, 0.947254)
